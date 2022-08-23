@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Event Planner Calendar App
 
-Things you may want to cover:
+# Currently my wife has to use 3 different calendars to keep track of all the work she does
 
-* Ruby version
+# My calendar app aims to have the functionality necessary to facilitate all requirements
 
-* System dependencies
+-MVP: As a user, I can:
+-Log into the site
+-View a calendar with events on the day
+-View a line item page with each event with more info
+-Enter a form with new event or to edit other events
+-All calendars will update after submitting a new form
+-Stretch: As a user, I can:
+-Make it look pretty
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Please see /client/public for wireframes and data structure
