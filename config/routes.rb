@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :pays
+  resources :details
+  resources :events
+  resources :planners
+  resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
