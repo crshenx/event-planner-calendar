@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import { useEffect } from "react";
 
 function Copyright(props) {
   return (
@@ -37,10 +38,29 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    console.log(data);
+
+    // let payload;
+    // for (const [key, value] of data) {
+    //   payload[key] = value;
+    // }
+    // console.log(payload);
+    const payload = {
+      // data: data,
       email: data.get("email"),
       password: data.get("password"),
-    });
+      name: data.get("firstName"),
+      user_name: data.get("lastName"),
+    };
+    fetch("/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((r) => r.json())
+      .then(console.log(data));
   };
 
   return (

@@ -37,10 +37,19 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const payload = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+    };
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((r) => r.json())
+      .then((data) => console.log(data));
   };
 
   return (
