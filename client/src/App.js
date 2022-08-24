@@ -5,14 +5,15 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login from "./view/Login";
 import SignUp from "./view/SignUp";
 import Paperbase from "./view/Home";
+import Landing from "./view/Landing";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   useEffect(() => {
     fetch("/login")
       .then((r) => r.json())
-      .then((d) => setCount(d.count));
+      .then((d) => console.log(d));
   }, []);
 
   return (
@@ -28,8 +29,11 @@ function App() {
           <Route path="/signup">
             <SignUp />
           </Route>
-          <Route exactpath="/">
+          <Route path="/home">
             <Paperbase />
+          </Route>
+          <Route exactpath="/">
+            <Landing />
           </Route>
         </Switch>
       </div>
