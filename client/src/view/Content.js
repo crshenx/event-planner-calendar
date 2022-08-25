@@ -1,5 +1,6 @@
 import * as React from "react";
 import Paper from "@mui/material/Paper";
+import MyCalendar from "./MyCalendar";
 // import AppBar from "@mui/material/AppBar";
 // import Toolbar from "@mui/material/Toolbar";
 // import Typography from "@mui/material/Typography";
@@ -52,6 +53,7 @@ export default function Content() {
       <Typography sx={{ my: 5, mx: 2 }} color="text.secondary" align="center">
         No users for this project yet
       </Typography> */}
+      <MyCalendar />
     </Paper>
   );
 }
