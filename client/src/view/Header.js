@@ -16,6 +16,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { logIn } from "./atoms";
 import { useRecoilState } from "recoil";
+import { Redirect } from "react-router-dom";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -25,7 +26,8 @@ function Header(props) {
   function handleLogOutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
-        setUser(null);
+        setUser({});
+        return <Redirect to="signin" />;
       }
     });
   }
@@ -89,7 +91,7 @@ function Header(props) {
           <Grid container alignItems="center" spacing={1}>
             <Grid item xs>
               <Typography color="inherit" variant="h5" component="h1">
-                Authentication
+                Event Calendar
               </Typography>
             </Grid>
             <Grid item>
@@ -120,10 +122,10 @@ function Header(props) {
         sx={{ zIndex: 0 }}
       >
         <Tabs value={0} textColor="inherit">
-          <Tab label="Users" />
-          <Tab label="Sign-in method" />
-          <Tab label="Templates" />
-          <Tab label="Usage" />
+          <Tab label="Calendar" />
+          <Tab label="Events" />
+          <Tab label="Planners" />
+          <Tab label="My Profile" />
         </Tabs>
       </AppBar>
     </React.Fragment>
