@@ -1,43 +1,77 @@
 // import logo from "./logo.svg";
 // import "./App.css";
-import { useEffect, useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./view/Login";
 import SignUp from "./view/SignUp";
 import Paperbase from "./view/Home";
-import Landing from "./view/Landing";
+//
+import { useRecoilState } from "recoil";
+import { logIn } from "./view/atoms";
+
+// const authContext = createContext();
+
+// // Auth provider that renders children
+// function ProvideAuth({ children }) {}
+
+// export const useAuth = () => {
+//   return useContext(authContext);
+// };
+
+// function useProvideAuth() {
+
+// }
 
 function App() {
-  // const [count, setCount] = useState(0);
+  const [logInState, setLogInState] = useRecoilState(logIn);
+  // console.log(logInState);
 
   useEffect(() => {
-    fetch("/login")
-      .then((r) => r.json())
-      .then((d) => console.log(d));
+    // auto-login
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        console.log(r);
+        r.json().then((user) => {
+          const now = new Date();
+          console.log(`fetch resolved at ${now.toString()} : ${Date.now()}`);
+          setLogInState(user);
+        });
+      }
+      // else {
+      //   return <Redirect to="/login" />;
+      // }
+    });
   }, []);
 
+  // if (logInState.email) {
+  //   return <Redirect to="/home" />;
+  // } else {
+  //   return <Redirect to="/signup" />;
+  // }
+
+  // console.log(logInState.email);
+
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Switch>
-          {/* <Route path="/testing">
+    <div className="App">
+      <Switch>
+        {/* <Route path="/testing">
             <h1>Test Route</h1>
           </Route> */}
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/signup">
-            <SignUp />
-          </Route>
-          <Route path="/home">
-            <Paperbase />
-          </Route>
-          <Route exactpath="/">
-            <Landing />
-          </Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route path="/home">
+          <Paperbase />
+        </Route>
+        <Route path="/">
+          {/* <Landing /> */}
+          <Login />
+        </Route>
+      </Switch>
+    </div>
   );
 }
 

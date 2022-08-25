@@ -14,11 +14,21 @@ import Tabs from "@mui/material/Tabs";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import { logIn } from "./atoms";
+import { useRecoilState } from "recoil";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
 function Header(props) {
+  const [user, setUser] = useRecoilState(logIn);
   const { onDrawerToggle } = props;
+  function handleLogOutClick() {
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        setUser(null);
+      }
+    });
+  }
 
   return (
     <React.Fragment>
@@ -88,8 +98,9 @@ function Header(props) {
                 variant="outlined"
                 color="inherit"
                 size="small"
+                onClick={handleLogOutClick}
               >
-                Web setup
+                Log Out
               </Button>
             </Grid>
             <Grid item>
