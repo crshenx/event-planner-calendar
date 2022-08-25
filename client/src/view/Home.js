@@ -8,6 +8,9 @@ import Link from "@mui/material/Link";
 import Navigator from "./Navigator";
 import Content from "./Content";
 import Header from "./Header";
+import { logIn } from "./atoms";
+import { Redirect, useHistory } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
 function Copyright() {
   return (
@@ -170,9 +173,21 @@ export default function Paperbase() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
 
+  const user = useRecoilValue(logIn);
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  console.log(`user:${user.email}`);
+  const now = new Date();
+  console.log(`render called at ${now.toString()} : ${Date.now()}`);
+
+  if (!user.email) {
+    console.log("inside conditional redirect home");
+
+    return <Redirect to="/login" />;
+  }
 
   return (
     <ThemeProvider theme={theme}>

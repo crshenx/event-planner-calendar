@@ -12,7 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { logIn } from "./atoms";
+import { Redirect } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -35,18 +37,12 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const [logInState, setLogInState] = useRecoilState(logIn);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data);
-
-    // let payload;
-    // for (const [key, value] of data) {
-    //   payload[key] = value;
-    // }
-    // console.log(payload);
     const payload = {
-      // data: data,
       email: data.get("email"),
       password: data.get("password"),
       name: data.get("firstName"),
@@ -60,8 +56,12 @@ export default function SignUp() {
       body: JSON.stringify(payload),
     })
       .then((r) => r.json())
-      .then(console.log(data));
+      .then(setLogInState);
   };
+
+  if (logInState.email) {
+    return <Redirect to="home" />;
+  }
 
   return (
     <ThemeProvider theme={theme}>

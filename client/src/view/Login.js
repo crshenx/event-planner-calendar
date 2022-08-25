@@ -1,4 +1,7 @@
 import * as React from "react";
+// import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { logIn } from "./atoms";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,6 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Redirect } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -34,6 +38,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
+  const [logInState, setLogInState] = useRecoilState(logIn);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -47,10 +53,20 @@ export default function Login() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
-    })
-      .then((r) => r.json())
-      .then((data) => console.log(data));
+    }).then((r) => {
+      if (!r.ok) {
+        alert("Invalid Username of Password");
+        return;
+      }
+      r.json().then((user) => {
+        setLogInState(user);
+      });
+    });
   };
+
+  if (logInState.email) {
+    return <Redirect to="home" />;
+  }
 
   return (
     <ThemeProvider theme={theme}>
