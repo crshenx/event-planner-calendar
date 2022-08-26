@@ -44,7 +44,7 @@ export default function MultilineTextFields() {
     <Box
       component="form"
       sx={{
-        "& .MuiTextField-root": { p: 2, m: 1, width: "25ch" },
+        "& .MuiTextField-root": { p: 1, m: 5, width: "35ch" },
       }}
       noValidate
       autoComplete="off"
@@ -53,8 +53,6 @@ export default function MultilineTextFields() {
       <div>
         <TextField id="name" label="Name" multiline maxRows={4} />
         <TextField id="email" label="Email" multiline maxRows={4} />
-      </div>
-      <div>
         <TextField
           id="phone_number"
           label="Phone Number"
@@ -62,9 +60,11 @@ export default function MultilineTextFields() {
           maxRows={4}
         />
       </div>
-      <Button variant="outlined" onClick={handleSubmit}>
-        Submit
-      </Button>
+      <div>
+        <Button variant="outlined" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </div>
     </Box>
   );
 }

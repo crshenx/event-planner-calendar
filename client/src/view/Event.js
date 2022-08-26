@@ -5,10 +5,10 @@ import { Button } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { logIn } from "./atoms";
 import { useState } from "react";
+import ChooseDate from "./ChooseDate";
 
 export default function MultilineTextFields() {
   const user = useRecoilValue(logIn);
-  console.log(user);
 
   const initialState = {
     name: "",
@@ -20,10 +20,13 @@ export default function MultilineTextFields() {
   };
 
   const [formData, setFormData] = useState(initialState);
+  const [date, setDate] = useState("");
+
+  console.log(date);
 
   function handleFormInput(e) {
     const input = e.target.id;
-    console.log(input);
+    // console.log(input);
     const state = { ...formData };
     state[input] = e.target.value;
     setFormData(state);
@@ -46,31 +49,35 @@ export default function MultilineTextFields() {
     setFormData(initialState);
   }
 
+  function handleChooseDate(e) {
+    console.log(e.taget.value);
+  }
+
   return (
     <Box
       component="form"
       sx={{
-        "& .MuiTextField-root": { p: 2, m: 1, width: "25ch" },
+        "& .MuiTextField-root": { p: 1, m: 5, width: "35ch" },
       }}
       noValidate
       autoComplete="off"
       onChange={handleFormInput}
     >
       <div>
+        <ChooseDate id="date" onSubmit={handleChooseDate} />
         <TextField id="title" label="Title" multiline maxRows={4} />
         <TextField id="location" label="Location" multiline maxRows={4} />
       </div>
       <div>
-        <TextField id="date" label="Date" multiline maxRows={4} />
+        {/* <TextField id="date" label="Date" multiline maxRows={4} /> */}
         <TextField id="type" label="Type" multiline maxRows={4} />
-      </div>
-      <div>
         <TextField id="address" label="Address" multiline maxRows={4} />
         <TextField id="planner" label="Planner" multiline maxRows={4} />
       </div>
       <Button variant="outlined" onClick={handleSubmit}>
         Submit
       </Button>
+      <div></div>
     </Box>
   );
 }

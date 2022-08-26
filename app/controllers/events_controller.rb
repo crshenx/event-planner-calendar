@@ -6,6 +6,10 @@ class EventsController < ApplicationController
         render json: event, status: :created
     end
 
+    def index
+        render json: Event.all 
+    end
+
     private
 
     def event_params
