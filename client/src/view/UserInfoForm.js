@@ -50,7 +50,7 @@ export default function MultilineTextFields() {
     <Box
       component="form"
       sx={{
-        "& .MuiTextField-root": { p: 2, m: 1, width: "25ch" },
+        "& .MuiTextField-root": { p: 1, m: 5, width: "35ch" },
       }}
       noValidate
       autoComplete="off"

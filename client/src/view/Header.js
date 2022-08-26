@@ -4,9 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import HelpIcon from "@mui/icons-material/Help";
 import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Tab from "@mui/material/Tab";
@@ -17,9 +15,7 @@ import Typography from "@mui/material/Typography";
 import { logIn } from "./atoms";
 import { useRecoilState } from "recoil";
 import { useHistory } from "react-router-dom";
-
 import MyCalendar from "./MyCalendar";
-
 import { useState } from "react";
 import Event from "./Event";
 import PlannerForm from "./PlannerForm";
@@ -33,7 +29,11 @@ function Header(props) {
 
   const history = useHistory();
 
-  const { onDrawerToggle } = props;
+  // const { onDrawerToggle } = props;
+
+  function onDrawerToggle(e) {
+    console.log(e.target);
+  }
 
   function handleLogOutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
@@ -66,21 +66,15 @@ function Header(props) {
             </Grid>
             <Grid item xs />
             <Grid item>
-              <Link
-                href="/"
-                variant="body2"
-                sx={{
-                  textDecoration: "none",
-                  color: lightColor,
-                  "&:hover": {
-                    color: "common.white",
-                  },
-                }}
-                rel="noopener noreferrer"
-                target="_blank"
+              <Button
+                sx={{ borderColor: lightColor }}
+                variant="outlined"
+                color="inherit"
+                size="small"
+                onClick={handleLogOutClick}
               >
-                Go to Sign in
-              </Link>
+                Log Out
+              </Button>
             </Grid>
             <Grid item>
               <Tooltip title="Alerts • No alerts">
@@ -111,24 +105,14 @@ function Header(props) {
                 Event Planning
               </Typography>
             </Grid>
-            <Grid item>
-              <Button
-                sx={{ borderColor: lightColor }}
-                variant="outlined"
-                color="inherit"
-                size="small"
-                onClick={handleLogOutClick}
-              >
-                Log Out
-              </Button>
-            </Grid>
+            {/* <Grid item></Grid>
             <Grid item>
               <Tooltip title="Help">
                 <IconButton color="inherit">
                   <HelpIcon />
                 </IconButton>
               </Tooltip>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Toolbar>
       </AppBar>
