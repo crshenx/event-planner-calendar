@@ -4,19 +4,22 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { logIn } from "./atoms";
+import { useState } from "react";
 
 export default function MultilineTextFields() {
   const user = useRecoilValue(logIn);
   console.log(user);
 
-  const [formData, setFormData] = React.useState({
-    title: "",
-    location: "",
-    date: "",
-    type: "",
-    addess: "",
-    planner: "",
-  });
+  const initialState = {
+    name: "",
+    user_name: "",
+    email: "",
+    phone_number: "",
+    password: "",
+    password_confirmation: "",
+  };
+
+  const [formData, setFormData] = useState(initialState);
 
   function handleFormInput(e) {
     const input = e.target.id;
@@ -37,7 +40,10 @@ export default function MultilineTextFields() {
       body: JSON.stringify(payload),
     })
       .then((r) => r.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+      });
+    setFormData(initialState);
   }
 
   return (

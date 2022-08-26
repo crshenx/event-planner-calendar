@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   post '/events', to: 'events#create'
 
+  post 'planners', to: "planners#create"
+
   get '*path',
   to: 'fallback#index',
   constraints: ->(req) { !req.xhr? && req.format.html? }
