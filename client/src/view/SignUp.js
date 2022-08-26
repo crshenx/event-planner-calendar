@@ -56,10 +56,15 @@ export default function SignUp() {
       body: JSON.stringify(payload),
     })
       .then((r) => r.json())
-      .then(setLogInState);
+      .then(setLogInState)
+      .then(redirect());
   };
 
-  if (logInState.email) {
+  // if (logInState.email) {
+  //   return <Redirect to="home" />;
+  // }
+
+  function redirect() {
     return <Redirect to="home" />;
   }
 

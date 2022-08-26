@@ -5,7 +5,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./view/Login";
 import SignUp from "./view/SignUp";
 import Paperbase from "./view/Home";
-//
 import { useRecoilState } from "recoil";
 import { logIn } from "./view/atoms";
 
@@ -42,14 +41,6 @@ function App() {
       // }
     });
   }, []);
-
-  // if (logInState.email) {
-  //   return <Redirect to="/home" />;
-  // } else {
-  //   return <Redirect to="/signup" />;
-  // }
-
-  // console.log(logInState.email);
 
   return (
     <div className="App">

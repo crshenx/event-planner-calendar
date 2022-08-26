@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_23_200426) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_26_014816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,16 +19,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_23_200426) do
     t.string "staffing"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "event_id"
   end
 
   create_table "events", force: :cascade do |t|
     t.string "location"
     t.string "title"
-    t.string "type"
+    t.string "type_of_event"
     t.string "date"
     t.string "addess"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "planner_id"
   end
 
   create_table "pays", force: :cascade do |t|
@@ -39,6 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_23_200426) do
     t.integer "estimate_hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "event_id"
   end
 
   create_table "planners", force: :cascade do |t|

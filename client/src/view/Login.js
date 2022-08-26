@@ -15,7 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -39,6 +39,7 @@ const theme = createTheme();
 
 export default function Login() {
   const [logInState, setLogInState] = useRecoilState(logIn);
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -60,13 +61,10 @@ export default function Login() {
       }
       r.json().then((user) => {
         setLogInState(user);
+        history.push("home");
       });
     });
   };
-
-  if (logInState.email) {
-    return <Redirect to="home" />;
-  }
 
   return (
     <ThemeProvider theme={theme}>
