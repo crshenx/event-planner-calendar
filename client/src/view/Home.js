@@ -3,26 +3,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-// import Navigator from "./Navigator";
-import Content from "./Content";
 import Header from "./Header";
 import { logIn } from "./atoms";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}.
-    </Typography>
-  );
-}
 
 let theme = createTheme({
   palette: {
@@ -172,56 +156,29 @@ const drawerWidth = 256;
 export default function Paperbase() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
-
+  const history = useHistory();
   const user = useRecoilValue(logIn);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+    console.log("WHERE THE FUCK IS THIS BUTTON");
   };
 
   console.log(`user:${user.email}`);
   const now = new Date();
   console.log(`render called at ${now.toString()} : ${Date.now()}`);
 
-  if (!user.email) {
-    console.log("inside conditional redirect home");
-
-    return <Redirect to="/login" />;
-  }
+  // if (!user.email) {
+  //   console.log("inside conditional redirect home");
+  //   history.push("signin");
+  // }
 
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex", minHeight: "100vh" }}>
         <CssBaseline />
-        {/* <Box
-          component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >
-          {isSmUp ? null : (
-            <Navigator
-              PaperProps={{ style: { width: drawerWidth } }}
-              variant="temporary"
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-            />
-          )}
-
-          <Navigator
-            PaperProps={{ style: { width: drawerWidth } }}
-            sx={{ display: { sm: "block", xs: "none" } }}
-          />
-        </Box> */}
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
           <Header onDrawerToggle={handleDrawerToggle} />
-          <Box
-            component="main"
-            sx={{ flex: 1, py: 6, px: 4, bgcolor: "#eaeff1" }}
-          >
-            <Content />
-          </Box>
-          <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}>
-            <Copyright />
-          </Box>
         </Box>
       </Box>
     </ThemeProvider>

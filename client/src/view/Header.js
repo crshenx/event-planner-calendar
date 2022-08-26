@@ -16,20 +16,37 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { logIn } from "./atoms";
 import { useRecoilState } from "recoil";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
+import MyCalendar from "./MyCalendar";
+
+import { useState } from "react";
+import Event from "./Event";
+import PlannerForm from "./PlannerForm";
+import UserInfoForm from "./UserInfoForm";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
 function Header(props) {
   const [user, setUser] = useRecoilState(logIn);
+  const [value, setValue] = useState(0);
+
+  const history = useHistory();
+
   const { onDrawerToggle } = props;
+
   function handleLogOutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
-        setUser({});
-        return <Redirect to="signin" />;
+        setUser(null);
+        history.push("login");
       }
     });
+  }
+
+  function handleTabs(e, val) {
+    console.log(e.target);
+    setValue(val);
   }
 
   return (
@@ -62,7 +79,7 @@ function Header(props) {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                Go to docs
+                Go to Sign in
               </Link>
             </Grid>
             <Grid item>
@@ -121,13 +138,20 @@ function Header(props) {
         elevation={0}
         sx={{ zIndex: 0 }}
       >
-        <Tabs value={0} textColor="inherit">
+        <Tabs value={value} textColor="inherit" onChange={handleTabs}>
           <Tab label="Calendar" />
           <Tab label="Events" />
           <Tab label="Planners" />
           <Tab label="My Profile" />
         </Tabs>
+        {/* <TabPanel value={value} index={0}>
+          Calendar
+        </TabPanel> */}
       </AppBar>
+      {value === 0 && <MyCalendar />}
+      {value === 1 && <Event />}
+      {value === 2 && <PlannerForm />}
+      {value === 3 && <UserInfoForm />}
     </React.Fragment>
   );
 }
