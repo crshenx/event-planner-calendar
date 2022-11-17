@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
@@ -66,6 +66,18 @@ function MyCalendar(props) {
         console.log(event);
       });
   });
+
+  let state = {
+    events: [
+      {
+        start: moment().toDate(),
+        end: moment().add(1, "days").toDate(),
+        title: "Some title",
+      },
+    ],
+  };
+
+  console.log(state);
 
   return (
     <div className="App">

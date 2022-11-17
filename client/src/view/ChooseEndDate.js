@@ -6,25 +6,20 @@ import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { atom, useRecoilState, useSetRecoilState } from "recoil";
-import { chooseDate } from "./atoms";
 
-export default function MaterialUIPickers() {
-  const setDateChoice = useSetRecoilState(chooseDate);
+export default function MaterialUIEndPickers() {
   const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
 
   const handleChange = (newValue) => {
-    setValue(newValue._i);
-    setDateChoice(newValue._i);
+    setValue(newValue);
   };
 
-  console.log(`recoil setter func: ` + chooseDate.date);
-  console.log(`regular state value: ` + value);
+  // console.log(value);
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <DateTimePicker
-        label="Start Date"
+        label="End Date"
         value={value}
         onChange={handleChange}
         renderInput={(params) => <TextField {...params} />}
