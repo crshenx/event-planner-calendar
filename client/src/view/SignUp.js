@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRecoilState } from "recoil";
 import { logIn } from "./atoms";
 import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -38,7 +39,7 @@ const theme = createTheme();
 
 export default function SignUp() {
   const [logInState, setLogInState] = useRecoilState(logIn);
-
+  let history = useHistory();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -57,7 +58,10 @@ export default function SignUp() {
     })
       .then((r) => r.json())
       .then(setLogInState)
-      .then(redirect());
+      .then(() => {
+        console.log(logInState);
+        history.push("/home");
+      });
   };
 
   // if (logInState.email) {

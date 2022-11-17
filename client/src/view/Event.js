@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil";
 import { logIn } from "./atoms";
 import { useState } from "react";
 import ChooseDate from "./ChooseDate";
+import ChooseEndDate from './ChooseEndDate'
 
 export default function MultilineTextFields() {
   const user = useRecoilValue(logIn);
@@ -64,7 +65,12 @@ export default function MultilineTextFields() {
       onChange={handleFormInput}
     >
       <div>
-        <ChooseDate id="date" onSubmit={handleChooseDate} />
+        <ChooseDate
+          id="start"
+          placeholder="asdfasdf"
+          onSubmit={handleChooseDate}
+        />
+        <ChooseEndDate id="end" onSubmit={handleChooseDate} />
         <TextField id="title" label="Title" multiline maxRows={4} />
         <TextField id="location" label="Location" multiline maxRows={4} />
       </div>
