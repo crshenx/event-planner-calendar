@@ -32,7 +32,7 @@ function Header(props) {
   // const { onDrawerToggle } = props;
 
   function onDrawerToggle(e) {
-    console.log(e.target);
+    // console.log(e.target);
   }
 
   function handleLogOutClick() {
@@ -45,7 +45,7 @@ function Header(props) {
   }
 
   function handleTabs(e, val) {
-    console.log(e.target);
+    // console.log(e.target);
     setValue(val);
   }
 

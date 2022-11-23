@@ -7,7 +7,7 @@ import { logIn } from "./atoms";
 
 export default function MultilineTextFields() {
   const user = useRecoilValue(logIn);
-  console.log(user);
+  // console.log(user);
 
   const [formData, setFormData] = React.useState({
     title: "",
@@ -20,7 +20,7 @@ export default function MultilineTextFields() {
 
   function handleFormInput(e) {
     const input = e.target.id;
-    console.log(input);
+    // console.log(input);
     const state = { ...formData };
     state[input] = e.target.value;
     setFormData(state);
@@ -28,7 +28,7 @@ export default function MultilineTextFields() {
 
   function handleSubmit() {
     const payload = { ...formData, user_id: user.id };
-    console.log(payload);
+    // console.log(payload);
     fetch("/planners", {
       method: "POST",
       headers: {

@@ -161,12 +161,12 @@ export default function Paperbase() {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-    console.log("WHERE THE FUCK IS THIS BUTTON");
+    // console.log("WHERE THE FUCK IS THIS BUTTON");
   };
 
-  console.log(`user:${user.email}`);
+  // console.log(`user:${user.email}`);
   const now = new Date();
-  console.log(`render called at ${now.toString()} : ${Date.now()}`);
+  // console.log(`render called at ${now.toString()} : ${Date.now()}`);
 
   // if (!user.email) {
   //   console.log("inside conditional redirect home");
