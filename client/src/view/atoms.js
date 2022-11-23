@@ -7,5 +7,5 @@ export const logIn = atom({
 
 export const chooseDate = atom({
   key: "chooseDate",
-  default: "",
+  default: {},
 });
