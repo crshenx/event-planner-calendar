@@ -1,19 +1,25 @@
 class EventsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
 
+
     def create
-        event = Event.create!(event_params)
-        render json: event, status: :created
+        # check if the user is logged in
+        if session[:user_id]
+            event = Event.create!(event_params)
+            render json: event, status: :created
+        end
     end
 
     def index
-        render json: Event.all 
+        # only render events that belong to the user
+        events = Event.where(user_id: session[:user_id])
+        render json: events
     end
 
     private
 
     def event_params
-        params.permit( :title, :location, :date, :type_of_event, :addess, :user_id, :planner_id)
+        params.permit( :title, :location, :date, :type_of_event, :address, :user_id, :planner_id, :start_date, :end_date)
     end
 
     def record_invalid(e)         

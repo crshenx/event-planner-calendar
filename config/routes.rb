@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   get "/me", to: "users#show"
 
-  get '/events', to: "events#show"
+  get '/events/:id', to: "events#show"
 
   post '/events', to: 'events#create'
 

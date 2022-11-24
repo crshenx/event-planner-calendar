@@ -29,10 +29,10 @@ function App() {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
-        console.log(r);
+        // console.log(r);
         r.json().then((user) => {
           const now = new Date();
-          console.log(`fetch resolved at ${now.toString()} : ${Date.now()}`);
+          // console.log(`fetch resolved at ${now.toString()} : ${Date.now()}`);
           setLogInState(user);
         });
       }

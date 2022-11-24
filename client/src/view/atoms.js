@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import moment from "moment";
 
 export const logIn = atom({
   key: "logIn",
@@ -6,6 +7,6 @@ export const logIn = atom({
 });
 
 export const chooseDate = atom({
-  key: "chooseDate",
-  default: {},
+  key: "chooseStartandEndDate",
+  default: { startDate: moment().toDate(), endDate: moment().toDate() },
 });
